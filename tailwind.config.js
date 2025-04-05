@@ -4,22 +4,29 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sans: ['SF Pro Display', 'Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       colors: {
         'brand': {
-          50: '#fff1f1',
-          100: '#ffe1e1',
-          200: '#ffc7c7',
-          300: '#ffa0a0',
-          400: '#ff6b6b',
-          500: '#ff5a60',
-          600: '#e5484d',
-          700: '#bf3033',
-          800: '#9a2a2d',
-          900: '#7e2a2d',
+          50: '#e6f2ff',
+          100: '#cce5ff',
+          200: '#99cbff',
+          300: '#66b0ff',
+          400: '#3396ff',
+          500: '#0071e3',
+          600: '#0058b0',
+          700: '#00448a',
+          800: '#002f61',
+          900: '#001b38',
         },
         'accent': {
           50: '#f0f0ff',

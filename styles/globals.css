@@ -3,10 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --primary: #ff5a60;
-  --primary-dark: #e5484d;
-  --secondary: #5955e8;
-  --bg-light: #fff9f9;
+  --primary: #0071e3;
+  --primary-dark: #0058b0;
+  --secondary: #8A2BE2;
+  --accent: #FF5A5F;
+  --bg-light: #f5f5f7;
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+}
+
+/* Using system fonts that look similar to SF Pro Display */
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('-apple-system'),
+       local('BlinkMacSystemFont'),
+       local('Segoe UI'),
+       local('Roboto'),
+       local('Helvetica Neue'),
+       local('Arial'),
+       local('sans-serif');
 }
 
 @layer base {
@@ -15,21 +32,22 @@
   }
   
   body {
-    @apply font-sans text-gray-900 bg-gradient-to-br from-white to-pink-50;
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply text-[var(--text-primary)] bg-white;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-[var(--primary)] rounded-full shadow-lg hover:bg-[var(--primary-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary)] transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-white bg-[var(--primary)] rounded-full shadow-xl hover:bg-[var(--primary-dark)] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary)];
   }
   
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-[var(--primary)] bg-white border border-[var(--primary)] rounded-full hover:bg-pink-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary)] transition-all duration-200;
+    @apply inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-[var(--primary)] bg-white border-2 border-[var(--primary)] rounded-full hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary)];
   }
   
   .section {
-    @apply py-16 md:py-24;
+    @apply py-20 md:py-32;
   }
   
   .container-custom {
