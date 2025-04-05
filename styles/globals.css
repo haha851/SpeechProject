@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0071e3;
+  --primary-dark: #0058b0;
+  --secondary: #8A2BE2;
+  --accent: #FF5A5F;
+  --bg-light: #f5f5f7;
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+}
+
+/* Using system fonts that look similar to SF Pro Display */
+@font-face {
+  font-family: 'SF Pro Display';
+  font-style: normal;
+  font-weight: 400;
+  src: local('-apple-system'),
+       local('BlinkMacSystemFont'),
+       local('Segoe UI'),
+       local('Roboto'),
+       local('Helvetica Neue'),
+       local('Arial'),
+       local('sans-serif');
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    @apply text-[var(--text-primary)] bg-white;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-white bg-[var(--primary)] rounded-full shadow-xl hover:bg-[var(--primary-dark)] transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary)];
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3.5 text-base font-medium text-[var(--primary)] bg-white border-2 border-[var(--primary)] rounded-full hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--primary)];
+  }
+  
+  .section {
+    @apply py-20 md:py-32;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-lg p-6 md:p-8 transition-all duration-300 hover:shadow-xl;
+  }
+  
+  .countdown {
+    @apply px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full;
+  }
+}
+
+.range-slider {
+  @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+}
+
+.range-slider::-webkit-slider-thumb {
+  @apply appearance-none w-6 h-6 rounded-full bg-[var(--primary)] cursor-pointer;
+}
+
+/* Multi-step form styles */
+.form-step {
+  @apply transition-all transform duration-500 ease-in-out;
+}
+
+.form-step.active {
+  @apply opacity-100 translate-x-0;
+}
+
+.form-step.inactive {
+  @apply opacity-0 translate-x-full absolute;
+}
+
+/* Custom animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
