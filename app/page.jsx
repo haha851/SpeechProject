@@ -16,6 +16,11 @@ import { ScrollIndicator, SocialProofNotification, ExitIntentPopup } from "../co
 import SmoothTransition from "../components/SmoothTransition";
 import { useTheme } from "../components/ThemeContext";
 
+// Import our new luxury components
+import RavenMascot from "../components/RavenMascot";
+import LuxuryShowcase from "../components/LuxuryShowcase";
+import LuxuryTestimonials from "../components/LuxuryTestimonials";
+
 export default function Home() {
   // Theme
   const { currentTheme, isDarkMode } = useTheme();
@@ -36,8 +41,10 @@ export default function Home() {
     hero: useRef(null),
     features: useRef(null),
     process: useRef(null),
+    luxuryShowcase: useRef(null),
     pricing: useRef(null),
     testimonials: useRef(null),
+    luxuryTestimonials: useRef(null),
     faq: useRef(null),
     cta: useRef(null),
   });
@@ -138,6 +145,9 @@ export default function Home() {
 
   return (
     <DynamicBackground currentTheme={currentTheme}>
+      {/* Raven Mascot - fixed position element */}
+      {!isLoading && <RavenMascot position="top-right" size="medium" />}
+      
       {/* Enhanced scroll indicator */}
       <ScrollIndicator />
       
@@ -256,6 +266,11 @@ export default function Home() {
                 <FeaturesSection />
               </div>
               
+              {/* New Luxury Showcase Section */}
+              <div ref={sectionsRef.current.luxuryShowcase}>
+                <LuxuryShowcase />
+              </div>
+              
               <div ref={sectionsRef.current.process}>
                 <ProcessSection />
               </div>
@@ -264,11 +279,14 @@ export default function Home() {
                 <PricingSection />
               </div>
               
+              {/* New Luxury Testimonials Section */}
+              <div ref={sectionsRef.current.luxuryTestimonials}>
+                <LuxuryTestimonials />
+              </div>
+              
               <div ref={sectionsRef.current.testimonials}>
                 <TestimonialsSection />
               </div>
-              
-              {/* Premium features are implemented but not displayed */}
               
               <div ref={sectionsRef.current.faq}>
                 <FaqSection />
