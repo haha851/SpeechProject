@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_GOOGLE_ANALYTICS": "G-NHP0V7DMK4"
+  },
+  "buildCommand": "next build"
+}
