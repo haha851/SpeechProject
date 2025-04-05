@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 
 export default function RavenMascot({ interactive = true, size = 'medium', position = 'top-right' }) {
   const ravenRef = useRef(null);
-  const wingRef = useRef(null);
-  const eyeRef = useRef(null);
+  const imageRef = useRef(null);
   const [animate, setAnimate] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const controls = useAnimation();
@@ -52,17 +52,17 @@ export default function RavenMascot({ interactive = true, size = 'medium', posit
       ease: "power1.inOut"
     });
 
-    // Wing animation on scroll
-    if (wingRef.current) {
-      gsap.to(wingRef.current, {
+    // Subtle hover animation on scroll
+    if (imageRef.current) {
+      gsap.to(imageRef.current, {
         scrollTrigger: {
           trigger: ravenRef.current,
           start: "top bottom",
           end: "bottom top",
           scrub: true
         },
-        rotate: 10,
-        transformOrigin: "top right",
+        scale: 1.05,
+        transformOrigin: "center center",
         ease: "power1.inOut"
       });
     }
@@ -94,33 +94,22 @@ export default function RavenMascot({ interactive = true, size = 'medium', posit
         // Update raven rotation to look at mouse
         gsap.to(ravenRef.current, {
           duration: 0.5,
-          rotationZ: Math.min(Math.max(angle / 10, -15), 15),
+          rotationZ: Math.min(Math.max(angle / 20, -10), 10),
           ease: "power2.out"
         });
         
-        // Update eye to look at mouse
-        if (eyeRef.current) {
-          gsap.to(eyeRef.current, {
+        // Make the image scale slightly on hover when mouse is very close
+        if (distance < 100 && imageRef.current) {
+          gsap.to(imageRef.current, {
             duration: 0.3,
-            x: Math.min(Math.max(deltaX / 50, -2), 2),
-            y: Math.min(Math.max(deltaY / 50, -2), 2),
-            ease: "power2.out"
-          });
-        }
-        
-        // Trigger wing movement if mouse is very close
-        if (distance < 100 && wingRef.current) {
-          gsap.to(wingRef.current, {
-            duration: 0.3,
-            rotate: 15,
+            scale: 1.1,
             ease: "power1.out",
-            onComplete: () => {
-              gsap.to(wingRef.current, {
-                duration: 0.5,
-                rotate: 0,
-                ease: "elastic.out(1, 0.3)"
-              });
-            }
+          });
+        } else if (imageRef.current) {
+          gsap.to(imageRef.current, {
+            duration: 0.5,
+            scale: 1,
+            ease: "power2.out"
           });
         }
       } else {
@@ -131,11 +120,10 @@ export default function RavenMascot({ interactive = true, size = 'medium', posit
           ease: "power2.out"
         });
         
-        if (eyeRef.current) {
-          gsap.to(eyeRef.current, {
+        if (imageRef.current) {
+          gsap.to(imageRef.current, {
             duration: 0.5,
-            x: 0,
-            y: 0,
+            scale: 1,
             ease: "power2.out"
           });
         }
@@ -194,122 +182,27 @@ export default function RavenMascot({ interactive = true, size = 'medium', posit
         </svg>
       </motion.div>
 
-      {/* Raven Silhouette */}
-      <svg 
-        viewBox="0 0 240 240" 
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full drop-shadow-2xl"
+      {/* Raven Image */}
+      <motion.div 
+        ref={imageRef}
+        className="w-full h-full relative"
+        animate={{
+          rotate: animate ? [0, 2, 0, -2, 0] : 0,
+        }}
+        transition={{
+          duration: 5,
+          ease: "easeInOut",
+          repeat: animate ? Infinity : 0
+        }}
       >
-        <g id="raven-body">
-          {/* Base shadow for depth */}
-          <motion.ellipse 
-            cx="120" 
-            cy="130" 
-            rx="85" 
-            ry="60" 
-            fill="rgba(0,0,0,0.2)" 
-            filter="blur(10px)"
-            animate={{
-              scale: [1, 1.05, 1],
-              opacity: [0.2, 0.25, 0.2]
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          
-          {/* Raven body */}
-          <path 
-            d="M120,60 C180,60 200,110 200,150 C200,190 160,200 120,200 C80,200 40,190 40,150 C40,110 60,60 120,60" 
-            fill="black" 
-          />
-
-          {/* Wings */}
-          <motion.path
-            ref={wingRef}
-            d="M120,80 C140,70 180,90 190,120 C170,100 150,95 120,100 Z"
-            fill="#111"
-            animate={{ 
-              rotate: animate ? [0, 5, 0] : 0 
-            }}
-            transition={{ 
-              duration: 1.5, 
-              ease: "easeInOut",
-              repeat: animate ? Infinity : 0
-            }}
-            style={{ transformOrigin: "40% 60%" }}
-          />
-
-          <motion.path
-            d="M120,80 C100,70 60,90 50,120 C70,100 90,95 120,100 Z"
-            fill="#111"
-            animate={{ 
-              rotate: animate ? [0, -5, 0] : 0 
-            }}
-            transition={{ 
-              duration: 1.5, 
-              ease: "easeInOut",
-              repeat: animate ? Infinity : 0,
-              delay: 0.2
-            }}
-            style={{ transformOrigin: "60% 60%" }}
-          />
-
-          {/* Head */}
-          <path 
-            d="M120,70 C135,70 145,60 145,45 C145,30 135,20 120,20 C105,20 95,30 95,45 C95,60 105,70 120,70"
-            fill="black"
-          />
-
-          {/* Beak */}
-          <path 
-            d="M120,45 L140,55 L120,60 Z" 
-            fill="#222"
-          />
-
-          {/* Eye */}
-          <g ref={eyeRef}>
-            <circle cx="125" cy="40" r="5" fill="#f0f0f0" />
-            <circle cx="126" cy="39" r="2" fill="#000" />
-            
-            {/* Eye shine */}
-            <circle cx="124" cy="38" r="1" fill="#fff" />
-          </g>
-
-          {/* Feather details */}
-          <motion.path 
-            d="M140,130 C150,140 160,150 170,145 C155,150 145,140 140,130 Z"
-            fill="#111"
-            animate={{ 
-              y: [0, -2, 0],
-              rotate: [0, 2, 0]
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
-            }}
-          />
-
-          <motion.path 
-            d="M100,130 C90,140 80,150 70,145 C85,150 95,140 100,130 Z"
-            fill="#111"
-            animate={{ 
-              y: [0, -1, 0],
-              rotate: [0, -1, 0]
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 0.5
-            }}
-          />
-        </g>
-      </svg>
+        <Image
+          src="/images/mascot.png"
+          alt="Raven Mascot"
+          fill
+          className="object-contain drop-shadow-2xl"
+          priority
+        />
+      </motion.div>
 
       {/* Subtle ink drip beneath the raven */}
       <motion.div 
