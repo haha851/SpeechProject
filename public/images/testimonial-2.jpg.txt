@@ -1,0 +1,7 @@
+This is a placeholder for the second testimonial image.
+
+This should be a professional headshot of a person who might give a testimonial for a speech writing service.
+Ideal image: A young professional woman, perhaps a recent graduate or early career professional, confident expression.
+
+You can generate this using your OpenAI API key with DALL-E 3, with a prompt like:
+"Professional headshot of a young woman in her 20s, business casual attire, confident expression, graduation or academic setting, warm lighting, high quality portrait photography"

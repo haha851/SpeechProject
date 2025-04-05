@@ -1,0 +1,7 @@
+This is a placeholder for the first testimonial image.
+
+This should be a professional headshot of a person who might give a testimonial for a speech writing service.
+Ideal image: A well-dressed man in his 30s-40s, business casual, warm smile, professional looking.
+
+You can generate this using your OpenAI API key with DALL-E 3, with a prompt like:
+"Professional business headshot of a man in his 30s, well-groomed, business casual attire, warm confident smile, neutral background, high quality, professional photography, LinkedIn profile style"

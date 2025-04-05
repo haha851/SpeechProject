@@ -1,0 +1,7 @@
+This is a placeholder for the speaker silhouette image.
+
+This should be an image of a silhouette of a person delivering a speech, possibly at a podium or on stage.
+The image should have a transparent background so it blends well with the purple/indigo gradient.
+
+You can generate this using your OpenAI API key with DALL-E 3, with a prompt like:
+"A sleek, modern silhouette of a confident speaker at a podium, elegant pose, minimalist design, transparent background, professional business presentation"
