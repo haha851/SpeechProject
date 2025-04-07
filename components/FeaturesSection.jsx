@@ -141,10 +141,10 @@ export default function FeaturesSection() {
             <motion.div
               key={index}
               variants={item}
-              className="card group backdrop-blur-sm"
+              className="card group backdrop-blur-sm hover:shadow-lg"
+              initial={{ y: 0 }}
               whileHover={{
                 y: -8,
-                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.2)",
                 transition: { duration: 0.2 }
               }}
             >

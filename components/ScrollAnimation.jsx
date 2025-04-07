@@ -36,6 +36,15 @@ export function RevealOnScroll({
     }
   };
   
+  // For SSR consistency, set initial state immediately
+  useEffect(() => {
+    // On initial mount
+    if (!isInView && !once) {
+      controls.set('hidden');
+    }
+  }, [controls, isInView, once]);
+
+  // Handle view changes
   useEffect(() => {
     if (isInView) {
       controls.start('visible');
@@ -98,6 +107,15 @@ export function StaggerOnScroll({
     }
   };
 
+  // For SSR consistency, set initial state immediately
+  useEffect(() => {
+    // On initial mount
+    if (!isInView && !once) {
+      controls.set('hidden');
+    }
+  }, [controls, isInView, once]);
+
+  // Handle view changes
   useEffect(() => {
     if (isInView) {
       controls.start('visible');
